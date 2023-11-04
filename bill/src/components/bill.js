@@ -1,7 +1,7 @@
 import React,{useEffect, useRef} from 'react';
 import ReactToPrint from "react-to-print";
 // import logo from '../src/logo.jpg'
-import './bill.css'
+import '../styles/bill.css'
 // import andal from '../src/andal.jpg'
 import generatePDF from 'react-to-pdf'
 import { useSelector } from 'react-redux';

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"
-import Biller from './Biller'
-import BillList from './BillList'
+import Biller from './components/Biller'
+import BillList from './components/BillList'
 import Modal from 'react-modal'
-import Tab from './tab'
-import Bill from './bill'
+import Tab from './components/tab'
+import Bill from './components/bill'
 
 
 Modal.setAppElement('#root');

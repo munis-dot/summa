@@ -1,5 +1,5 @@
 import React,{useRef} from 'react';
-import './InvoiceBill.css'; // Import the stylesheet for styling
+import '../styles/InvoiceBill.css'; // Import the stylesheet for styling
 import ReactToPrint from "react-to-print";
 // import logo from '../src/logo.jpg'
 function InvoiceBill({ billData }) {
