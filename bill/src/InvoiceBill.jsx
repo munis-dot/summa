@@ -1,6 +1,7 @@
 import React,{useRef} from 'react';
 import './InvoiceBill.css'; // Import the stylesheet for styling
 import ReactToPrint from "react-to-print";
+// import logo from '../src/logo.jpg'
 function InvoiceBill({ billData }) {
     const ref=useRef(null)
   const { billNumber, customerName, customerMobile, items, datetime } = billData;
@@ -17,7 +18,9 @@ function InvoiceBill({ billData }) {
     <>
     <div className="invoice" ref={ref}>
       <div className="invoice-header">
-        <h2>Invoice Bill</h2>
+        {/* <img className="logo" src={logo} alt="logo"></img> */}
+        <h6>Sri Tiptop fancy store</h6>
+        <h6>ph:9843306089</h6>
         <p className="bill-number">Bill Number: {billNumber}</p>
         <p className="date-time">Date and Time: {new Date(datetime).toLocaleString()}</p>
       </div>
@@ -40,35 +43,36 @@ function InvoiceBill({ billData }) {
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{item.name}</td>
-              <td>${item.price}</td>
+              <td>{item.price}</td>
               <td>{item.quantity}</td>
-              <td>${item.price * item.quantity}</td>
+              <td>{item.price * item.quantity}</td>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="total">
-        <p>Total Amount: ${calculateTotal()}</p>
+        <p>Total Amount: {calculateTotal()}</p>
       </div>
      
     </div>
      <ReactToPrint
      trigger={() => <button style={{backgroundColor:"white",marginLeft:"300px",width:"300px",border:"1px solid black"}}>Print this out!</button>}
      content={() => ref.current}
-     onBeforeGetContent={() => {
+    // //  onBeforeGetContent={() => {
        
-      }}
-      onAfterPrint={() => {
-        // Any post-printing actions you want to perform
-        const fileName = setFileName();
-        const link = document.createElement('a');
-        link.href = '';
-        link.download = fileName;
-        link.click();
-      }}
+    // //   }}
+    // onAfterPrint={() => {
+    //   const fileName = setFileName();
+    //   const pdfBlob = new Blob([ref.current.outerHTML], { type: 'application/pdf' });
+    //   const url = URL.createObjectURL(pdfBlob);
+    //   const link = document.createElement('a');
+    //   link.href = url;
+    //   link.download = fileName;
+    //   link.click();
+    //   URL.revokeObjectURL(url);
+    // }}
    />
    </>
   );
 }
-
-export default InvoiceBill;
+export default InvoiceBill
