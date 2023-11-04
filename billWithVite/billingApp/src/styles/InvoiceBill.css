@@ -1,0 +1,282 @@
+
+
+.invoice {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+  }
+  
+  .invoice-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .bill-number {
+    font-weight: bold;
+  }
+  
+  .date-time {
+    color: #555;
+  }
+  
+  .customer-details {
+    margin-bottom: 20px;
+  }
+  
+  .invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-table th,
+  .invoice-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .invoice-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  .total {
+    text-align: right;
+    font-weight: bold;
+  }
+  
+   /* InvoiceBill.css */
+   /* .invoice {
+    width: 50mm; 
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+  }
+  
+  
+  @page {
+    size: 50mm;
+    margin: 0; 
+  }
+  
+  .invoice-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+.bill-number, .date-time {
+  margin: 5px 0;
+
+}
+
+.customer-details {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.invoice-table th, .invoice-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+}
+
+.print-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.print-button button {
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.print-button button:hover {
+  background-color: #f0f0f0;
+}
+
+.logo{
+  width: 120px;
+  height:120px
+} */
+/* InvoiceBill.css */
+/* .invoice {
+  width: 50mm;  
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+}
+
+
+@page {
+  size: 50mm;
+  margin: 0; 
+}
+
+.invoice-header {
+  text-align: center;
+ 
+}
+
+.invoice-header h6{
+  font-weight: bold;
+}
+.invoice-header p{
+  margin-bottom: -1px;
+}
+
+.bill-number, .date-time {
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.customer-details {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 8px;
+  font-weight: bold;
+  padding: 0 5px; 
+}
+
+.invoice-table {
+  width: 50mm;
+  border-collapse: collapse;
+  margin-bottom: 10px; 
+}
+
+.invoice-table th, .invoice-table td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.print-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.print-button button {
+  background-color: white;
+  border: 1px solid black;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.print-button button:hover {
+  background-color: #f0f0f0;
+}
+
+.logo {
+  width: 80px; 
+  height: auto; 
+} */
+/* InvoiceBill.css */
+/* CSS for Invoice */
+/* .invoice {
+  width: 50mm;
+  margin: 0 auto;
+  padding: 5px;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 12px; 
+}
+
+.invoice-header {
+  text-align: center;
+  margin-bottom: 10px; 
+}
+
+.bill-number, .date-time {
+  margin: 5px 0; 
+}
+
+.customer-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px; 
+  font-weight: bold;
+  margin-top: 5px; 
+}
+
+.invoice-table {
+  width: 50%; 
+  border-collapse: collapse;
+  margin-bottom: 5px;
+}
+
+.invoice-table th, .invoice-table td {
+
+  padding: 4px; 
+  text-align: center;
+  font-weight: bold;
+  font-size: 9px; 
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.print-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.print-button button {
+  background-color: white;
+  border: 1px solid black;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 10px; 
+}
+
+.print-button button:hover {
+  background-color: #f0f0f0;
+}
+
+.logo {
+  width: 40px; 
+  height: auto;
+} */
+
+/* Uncomment the @page rule if needed */
+/*@page {
+  size: 55mm; /* Adjust page size */
+  /* margin: 0; */
+/* }*/ 

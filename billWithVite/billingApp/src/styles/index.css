@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+td span{
+  padding: 10px !important;
+}
+
+.closeIcon{
+  position: absolute;
+  right: 0%;
+  margin-right: 10px;
+  color: white;
+}
+
+.closeIcon:hover{
+  background-color: aliceblue;
+  color: blue !important;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.nav-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  /* width: max-content; */
+  /* padding-right: 30px; */
+  position: relative;
+  cursor: pointer;
+}
+.nav-tabs .nav-link{
+  background-color: aliceblue;
+  color: rgb(25, 7, 113) !important;
+  border: 1px solid lightgrey !important;
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
+    margin-top: 2px;
+
+}
+.nav-tabs .nav-link.active{
+  background-color: rgb(51, 43, 92) !important;
+  color: white !important;
+}
+.nav-tabs{
+  border-bottom: 1px solid lightgray !important;
+}
+
+.editBtn{
+  display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
