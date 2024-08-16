@@ -122,11 +122,11 @@ function Bill(props) {
 
             </div>
             <div className="col-8 mt-1 from-address d-flex align-items-center flex-column">
-              <h6 style={{fontSize:"35px"}}>SRI TIP TOP FANCY STORE</h6>
-              <p style={{fontSize:"17px"}}>45 B2, Noorullah Mall, Santhosh theatre Opposite</p>
-              <p>phone: 9799112309, 9843306089 </p>
+              <h6 style={{fontSize:"35px"}}>SRI TIP TOP FOOTWEAR</h6>
+              <p style={{fontSize:"17px"}}>45 B3, Noorullah Mall, Santhosh theatre Opposite</p>
+              <p>phone: 7639642203 , 9043787626 </p>
               <p>Email: tiptopfancystore@gmail.com</p>
-              <p>GSTIN: 33BBMPM3084N1Z6</p>
+              <p>GSTIN: 33AQPPA4188C1Z1</p>
               <div className="row" style={{marginTop:"10px"}}>
             <div className="d-flex justify-content-center">
               <p className="h6">Estimate</p>
@@ -175,7 +175,7 @@ function Bill(props) {
               </tbody>
               <tbody>
               {billData?.items.map((item, index) => (
-            <tr key={index}>
+            <tr style={{border:"none"}} key={index}>
               <th>{index + 1}</th>
               <th>{item.name}</th>
               <th>{item.price}</th>
