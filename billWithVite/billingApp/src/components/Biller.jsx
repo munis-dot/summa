@@ -99,7 +99,7 @@ function Biller() {
     if (mode.isEdit) {
       dispatch(changeEditBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.checked != undefined  ? e.target.checked : e.target.value}))
       setTemp((prev) => ({
-        ...prev, [e.target.name]: e.target.checked ? e.target.checked != undefined : e.target.value
+        ...prev, [e.target.name]: e.target.checked!= undefined ? e.target.checked  : e.target.value
       }))
     }
     else {
@@ -235,7 +235,7 @@ function Biller() {
       datetime: new Date().toLocaleString(),
       items: addInitialData.items,
       total: calculateTotal(addInitialData?.items),
-      credit:addInitialData.credit
+      credit:addInitialData?.credit
     };
 
     await addDoc(collection(db, "bill"), {
@@ -258,7 +258,7 @@ function Biller() {
       customerMobile: editInitialData.customerMobile,
       datetime: editInitialData.datetime,
       items: editInitialData.items,
-      credit:editInitialData.credit,
+      credit:editInitialData?.credit,
       total: calculateTotal(editInitialData?.items)
     };
 
