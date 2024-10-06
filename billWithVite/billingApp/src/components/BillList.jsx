@@ -138,7 +138,7 @@ querySnapshot.forEach((doc)=>{
                 <th>Credit</th>
                 <th>Action</th>
               </tr>
-              
+            
             </thead>
             <tbody>
         {filter?.map((bill) => (
