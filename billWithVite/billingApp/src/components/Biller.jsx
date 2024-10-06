@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useReducer } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InvoiceBill from './InvoiceBill';
 // import * as firebase from './firebase';
@@ -15,12 +15,12 @@ function Biller() {
   const redux = useSelector(state => state)
   const addInitialData = redux.bill?.addBill?.[redux.bill?.tabIndex]
   const editInitialData = redux.bill?.editBill?.[redux.bill?.tabIndex]
-
   const defaultData = {
     customerAddress: '',
     customerMobile: "",
     customerName: "",
     billNumber: 0,
+    credit:false,
     items: []
   }
 
@@ -68,21 +68,23 @@ function Biller() {
       dispatch(editBill({
         tabIndex: window.location.pathname.split('/').pop(), data: {
           customerAddress: state.state.data.billData.customerAddress,
+          credit: state.state.data.billData.credit,
           customerMobile: state.state.data.billData.customerMobile,
           customerName: state.state.data.billData.customerName,
           items: state.state.data.billData.items,
           billNumber: state.state.data.billData.billNumber,
-          datetime:  state.state.data.billData.datetime,
+          datetime: state.state.data.billData.datetime,
           refId: state.state.data.refId
         }
       }))
       setTemp(() => ({
         customerAddress: state.state.data.billData.customerAddress,
         customerMobile: state.state.data.billData.customerMobile,
+        credit: state.state.data.billData.credit,
         customerName: state.state.data.billData.customerName,
         items: state.state.data.billData.items,
         billNumber: state.state.data.billData.billNumber,
-        datetime:  state.state.data.billData.datetime
+        datetime: state.state.data.billData.datetime
       }))
     }
     else {
@@ -95,15 +97,15 @@ function Biller() {
 
   const handleChange = (e) => {
     if (mode.isEdit) {
-      dispatch(changeEditBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.value }))
+      dispatch(changeEditBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.checked != undefined  ? e.target.checked : e.target.value}))
       setTemp((prev) => ({
-        ...prev, [e.target.name]: e.target.value
+        ...prev, [e.target.name]: e.target.checked ? e.target.checked != undefined : e.target.value
       }))
     }
     else {
-      dispatch(changeAddBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.value }))
+      dispatch(changeAddBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.checked != undefined ? e.target.checked : e.target.value }))
       setTemp((prev) => ({
-        ...prev, [e.target.name]: e.target.value
+        ...prev, [e.target.name]: e.target.checked!= undefined ? e.target.checked : e.target.value
       }))
     }
   }
@@ -232,22 +234,23 @@ function Biller() {
       customerMobile: addInitialData.customerMobile,
       datetime: new Date().toLocaleString(),
       items: addInitialData.items,
-      total: calculateTotal(addInitialData?.items)
+      total: calculateTotal(addInitialData?.items),
+      credit:addInitialData.credit
     };
 
-      await addDoc(collection(db, "bill"), {
-        datetime: new Date().toISOString(),
-        id: billNumber + 1,
-        billData: billData
-      });
+    await addDoc(collection(db, "bill"), {
+      datetime: new Date().toISOString(),
+      id: billNumber + 1,
+      billData: billData
+    });
 
     setOpen(true);
     setBillData(() => billData);
     setTemp();
-    dispatch(addBill({tabIndex:redux.bill.tabIndex,data:defaultData}))
+    dispatch(addBill({ tabIndex: redux.bill.tabIndex, data: defaultData }))
   };
 
-  const handleUpdate = async(e) =>{
+  const handleUpdate = async (e) => {
     const billData = {
       customerName: editInitialData.customerName,
       customerAddress: editInitialData.customerAddress,
@@ -255,17 +258,18 @@ function Biller() {
       customerMobile: editInitialData.customerMobile,
       datetime: editInitialData.datetime,
       items: editInitialData.items,
+      credit:editInitialData.credit,
       total: calculateTotal(editInitialData?.items)
     };
 
-    const docs = doc(db,'bill',editInitialData.refId)
+    const docs = doc(db, 'bill', editInitialData.refId)
 
-    await setDoc(docs, {billData}, { merge:true }).then(docRef => {
-      console.log("Entire Document has been updated successfully",docRef);
-  })
-  .catch(error => {
-      console.log(error);
-  });
+    await setDoc(docs, { billData }, { merge: true }).then(docRef => {
+      console.log("Entire Document has been updated successfully", docRef);
+    })
+      .catch(error => {
+        console.log(error);
+      });
 
     setOpen(true);
     setBillData(() => billData);
@@ -394,12 +398,25 @@ function Biller() {
     });
   };
 
-
   return (
     <div className="container mt-5">
       <h1 className="mb-4 text-center">TipTop Billing App</h1>
-      <button className='btn bg-primary text-light mb-3'><Link to='/bill/BillList'><h6 className='text-light'>Sales</h6></Link></button>
-     
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <button className='btn bg-primary text-light mb-3'><Link to='/bill/BillList'><h6 className='text-light'>Sales</h6></Link></button>
+          <div>
+      <label style={{ paddingRight: "10px" }} htmlFor="credit">
+        Credit
+      </label>
+      <input
+        type="checkbox"
+        id="credit"
+        name="credit"
+        checked={temp?.credit}
+        onChange={handleChange}
+      />
+    </div>
+      </div>
+
       <div className="row mb-3">
         <div className="col">
           <input
@@ -560,12 +577,12 @@ function Biller() {
           </tr>
         </tfoot>
       </table>
-     {temp?.items.length>0 && <div className="row mb-3">
+      {temp?.items.length > 0 && <div className="row mb-3">
         {/* <div className="col">
           <button className="btn btn-success btn-block" onClick={handleSave}>Save</button>
         </div> */}
         <div className="col d-flex flex-row-reverse">
-          <button className="btn btn-primary btn-block" onClick={e=>{mode.isEdit?handleUpdate():handleSave()}} >{mode.isEdit ? "Update & Preview" : "Save & Preview"}</button>
+          <button className="btn btn-primary btn-block" onClick={e => { mode.isEdit ? handleUpdate() : handleSave() }} >{mode.isEdit ? "Update & Preview" : "Save & Preview"}</button>
         </div>
       </div>}
       {open &&

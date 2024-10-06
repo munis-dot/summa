@@ -135,8 +135,10 @@ querySnapshot.forEach((doc)=>{
                 <th>Name</th>
                 <th>Date</th>
                 <th>Amount</th>
+                <th>Credit</th>
                 <th>Action</th>
               </tr>
+            
             </thead>
             <tbody>
         {filter?.map((bill) => (
@@ -145,6 +147,7 @@ querySnapshot.forEach((doc)=>{
             <td>{bill.billData.customerName}</td>
             <td>{(typeof bill.datetime == 'string')?new Date(bill?.datetime).toLocaleString() :bill?.datetime?.toDate().toDateString()}</td>
             <td>{bill.billData.total}</td>
+            <td>{bill.billData.credit ? 'yes' : "no"}</td>
             <td>
               <span className='text-primary' style={{cursor:"pointer"}} onClick={e=>{navigate(`/view/ViewBill${bill.id}`);dispatch(viewBill({tabIndex:`viewBill${bill.id}`,data:bill}));}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
