@@ -1,4 +1,4 @@
-import React,{useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactToPrint from "react-to-print";
 // import logo from '../src/logo.jpg'
 import '../styles/bill.css'
@@ -7,14 +7,14 @@ import generatePDF from 'react-to-pdf'
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 function Bill(props) {
-  const ref=useRef(null)
-  const redux = useSelector(state=>state)
-  const tabIndex=redux.bill.tabIndex.substring(0, 1).toLowerCase() + redux.bill.tabIndex.substring(1);
-  console.log(redux.bill.viewBill?.[tabIndex],tabIndex)
-  const navigation =useNavigate()
- 
+  const ref = useRef(null)
+  const redux = useSelector(state => state)
+  const tabIndex = redux.bill.tabIndex.substring(0, 1).toLowerCase() + redux.bill.tabIndex.substring(1);
+  console.log(redux.bill.viewBill?.[tabIndex], tabIndex)
+  const navigation = useNavigate()
+
   const billData = props?.billData ? props?.billData : redux.bill.viewBill?.[tabIndex]?.billData;
-  
+
   const calculateTotal = () => {
     return billData?.items.reduce((total, item) => total + item.price * item.quantity, 0);
   };
@@ -26,19 +26,19 @@ function Bill(props) {
       "eleven", "twelve", "thirteen", "fourteen", "fifteen",
       "sixteen", "seventeen", "eighteen", "nineteen"
     ];
-  
+
     const tens = [
       "", "", "twenty", "thirty", "forty", "fifty",
       "sixty", "seventy", "eighty", "ninety"
     ];
-  
+
     const scales = ["", "thousand", "million", "billion", "trillion"];
-  
+
     function convertChunk(number) {
       if (number === 0) return "zero";
-      
+
       let words = "";
-      
+
       if (number >= 100) {
         words += ones[Math.floor(number / 100)] + " hundred";
         number %= 100;
@@ -46,7 +46,7 @@ function Bill(props) {
           words += " and ";
         }
       }
-      
+
       if (number >= 20) {
         words += tens[Math.floor(number / 10)];
         number %= 10;
@@ -54,19 +54,19 @@ function Bill(props) {
           words += " ";
         }
       }
-      
+
       if (number > 0) {
         words += ones[number];
       }
-      
+
       return words.trim();
     }
-  
+
     if (number === 0) return "zero";
-  
+
     let words = "";
     let chunkCount = 0;
-  
+
     while (number > 0) {
       if (number % 1000 !== 0) {
         let chunkWords = convertChunk(number % 1000);
@@ -78,10 +78,10 @@ function Bill(props) {
       number = Math.floor(number / 1000);
       chunkCount++;
     }
-  
+
     return words.trim();
   }
-  
+
 
   function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
@@ -90,13 +90,13 @@ function Bill(props) {
     let hours = date.getHours();
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const amOrPm = hours >= 12 ? 'PM' : 'AM';
-  
+
     if (hours > 12) {
       hours -= 12;
     } else if (hours === 0) {
       hours = 12;
     }
-  
+
     return `${day}/${month}/${year} ${hours}:${minutes} ${amOrPm}`;
   }
 
@@ -104,7 +104,7 @@ function Bill(props) {
   // Example usage:
   const amountInWords = numberToWords(1234567);
   console.log(amountInWords); // Outputs: "one million two hundred thirty-four thousand five hundred sixty-seven"
-  
+
 
   // const setFileName = () => {
   //   const fileName = `${billData.billData?.billNumber}-${billData.billData?.customerName}.pdf`;
@@ -115,79 +115,93 @@ function Bill(props) {
       {/* { redux.bill.viewBill?.[tabIndex] && <div className='editBtn container'>
       <button className='btn bg-primary text-light mb-3' onClick={e=>navigation(`/biller/EditBill/${billData?.billNumber}`,{state:{data:redux.bill.viewBill?.[tabIndex]}})}><h6 className='text-light'>Edit</h6></button>
       </div>} */}
-        <div className="container bill" ref={ref}>
-          <div className="row">
-            <div className="col-2 mt-1">
+      <div className="container bill" ref={ref}>
+        <div className="row">
+          <div className="col-2 mt-1">
             <img src="/andal.jpg" alt="logo" width="150px" height="200px" />
 
-            </div>
-            <div className="col-8 mt-1 from-address d-flex align-items-center flex-column">
-              <h6 style={{fontSize:"35px"}}>SRI TIP TOP FOOTWEAR</h6>
-              <p style={{fontSize:"17px"}}>45 B3, Noorullah Mall, Santhosh theatre Opposite</p>
-              <p>phone: 7639642203 , 9043787626 </p>
-              <p>Email: tiptopfancystore@gmail.com</p>
-              <p>GSTIN: 33AQPPA4188C1Z1</p>
-              <div className="row" style={{marginTop:"10px"}}>
-            <div className="d-flex justify-content-center">
-              <p className="h6">Estimate</p>
-            </div>
-            <div className="d-flex justify-content-center">
-              <p>Quotation</p>
+          </div>
+          <div className="col-8 mt-1 from-address d-flex align-items-center flex-column">
+            <h6 style={{ fontSize: "35px" }}>SRI TIP TOP FOOTWEAR</h6>
+            <p style={{ fontSize: "17px" }}>45 B3, Noorullah Mall, Santhosh theatre Opposite</p>
+            <p>phone: 7639642203 , 9043787626 </p>
+            <p>Email: tiptopfancystore@gmail.com</p>
+            <p>GSTIN: 33AQPPA4188C1Z1</p>
+            <div className="row" style={{ marginTop: "10px" }}>
+              <div className="d-flex justify-content-center">
+                <p className="h6">Estimate</p>
+              </div>
+              <div className="d-flex justify-content-center">
+                <p>Quotation</p>
+              </div>
             </div>
           </div>
-            </div>
-            <div className='col-2 mt-1 d-flex justify-content-end'>
+          <div className='col-2 mt-1 d-flex justify-content-end'>
             <img src='/logo.jpg' alt="logo" width="230px" height="230px" />
 
-            </div>
           </div>
-        
-          <div className="row" style={{marginTop:"-33px"}}>
-            <table className="table table-bordered ms-4 mt-2 billTable">
-              <tbody>
-                <tr>
-                  <th scope="col" colSpan="3">
-                    <div className="from-address align-items-start">
-                      <p>Bill To:<b>{billData?.customerName}</b></p>
-                      <p>Address: {billData?.customerAddress}</p>
-                      <p>phone: {billData?.customerMobile} </p>
-                      {/* <p>GSTIN: 33BBMPM3084N1Z6</p> */}
-                    </div>
-                  </th>
-                  <td scope="col" colSpan="2">
-                    <div className="">
-                      <p>Invoice No:<b>{billData?.billNumber}</b></p>
-                      <p>Date:{billData?.datetime ? formatDate(new Date(billData?.datetime)) : formatDate(new Date())}</p>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-              <tbody>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col" style={{ width: '70%' }}>
-                    ITEM
-                  </th>
-                  <th scope="col">PRICE</th>
-                  <th scope="col">QUANTITY</th>
-                  <th scope="col">AMOUNT</th>
-                </tr>
-              </tbody>
-              <tbody>
+        </div>
+
+        <div className="row" style={{ marginTop: "-33px" }}>
+          <table className="table table-bordered ms-4 mt-2 billTable">
+            <tbody>
+              <tr>
+                <th scope="col" colSpan="3">
+                  <div className="from-address align-items-start">
+                    <p>Bill To:<b>{billData?.customerName}</b></p>
+                    <p>Address: {billData?.customerAddress}</p>
+                    <p>phone: {billData?.customerMobile} </p>
+                    {/* <p>GSTIN: 33BBMPM3084N1Z6</p> */}
+
+                  </div>
+                </th>
+                <td scope="col" colSpan="2">
+                  <div className="">
+                    <p>Invoice No: <b>{billData?.billNumber}</b></p>
+                    <p>Date: {billData?.datetime ? formatDate(new Date(billData?.datetime)) : formatDate(new Date())}</p>
+                    <p>Time: {new Date().toLocaleTimeString()}</p>
+                    <p>Term: {billData.credit ? 'credit' : 'cash'}</p>
+                  </div>
+                </td>
+
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" style={{ width: '70%' }}>
+                  ITEM
+                </th>
+                <th scope="col">PRICE</th>
+                <th scope="col">QUANTITY</th>
+                <th scope="col">AMOUNT</th>
+              </tr>
+            </tbody>
+            <tbody>
               {billData?.items.map((item, index) => (
-            <tr style={{border:"none"}} key={index}>
-              <th>{index + 1}</th>
-              <th>{item.name}</th>
-              <th>{item.price}</th>
-              <th>{item.quantity}</th>
-              <th>{item.price * item.quantity}</th>
-            </tr>
-          ))}
-                <tr>
-                  <th colSpan="4">Total</th>
-                  <th>{calculateTotal()}</th>
+                <tr style={{ border: "none" }} key={index}>
+                  <th>{index + 1}</th>
+                  <th>{item.name}</th>
+                  <th>{item.price}</th>
+                  <th>{item.quantity}</th>
+                  <th>{item.price * item.quantity}</th>
                 </tr>
-            <tr>
+              ))}
+              <tr >
+                <th colSpan="2">
+                  <div>
+                    <p className="h6">Bank Details:</p>
+                    <p>BankName : KVB</p>
+                    <p>AC/N0 : 1804135000004073</p>
+                    <p>Name : sri tiptop footwear</p>
+                    <p>IFSC CODE : KVBL000184</p>
+                    <p>GPAY : 7639642203,9043787626</p>
+                  </div>
+                </th>
+                <th colSpan="2">Total</th>
+                <th >{calculateTotal()}</th>
+              </tr>
+              <tr>
                 <td colSpan="5">
                   <div className="">
                     <p className="h6">Amount In Words</p>
@@ -200,29 +214,29 @@ function Bill(props) {
                     </p>
                   </div>
                 </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div className="d-flex justify-content-center">
+      </div>
+      <div className="d-flex justify-content-center">
         <ReactToPrint
-   trigger={() => <button className='btn bg-primary text-white'>Print this out!</button>}
-   content={() => ref.current}
- 
-  // //  onBeforeGetContent={() => {
-     
-  // //   }}
-  onBeforePrint={() => {
-    const printOptions = {
-      silent: true,
-    };
-  }}
- />
- <button className='btn bg-primary text-white mx-4' onClick={() => generatePDF(ref, {filename: `${billData?.customerName}${billData?.billNumber}`})}>Download Pdf</button>
-          </div>
-          </div>
-    
+          trigger={() => <button className='btn bg-primary text-white'>Print this out!</button>}
+          content={() => ref.current}
+
+          // //  onBeforeGetContent={() => {
+
+          // //   }}
+          onBeforePrint={() => {
+            const printOptions = {
+              silent: true,
+            };
+          }}
+        />
+        <button className='btn bg-primary text-white mx-4' onClick={() => generatePDF(ref, { filename: `${billData?.customerName}${billData?.billNumber}` })}>Download Pdf</button>
+      </div>
+    </div>
+
   );
 }
 
