@@ -20,7 +20,7 @@ function Biller() {
     customerMobile: "",
     customerName: "",
     billNumber: 0,
-    credit:false,
+    credit: false,
     items: []
   }
 
@@ -97,16 +97,18 @@ function Biller() {
 
   const handleChange = (e) => {
     if (mode.isEdit) {
-      dispatch(changeEditBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.checked != undefined  ? e.target.checked : e.target.value}))
+      dispatch(changeEditBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.type === 'checkbox' ? e.target.checked : e.target.value }))
       setTemp((prev) => ({
-        ...prev, [e.target.name]: e.target.checked!= undefined ? e.target.checked  : e.target.value
-      }))
+        ...prev,
+        [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value
+      }));
     }
     else {
-      dispatch(changeAddBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.checked != undefined ? e.target.checked : e.target.value }))
+      dispatch(changeAddBill({ tabIndex: redux.bill.tabIndex, name: e.target.name, data: e.target.type === 'checkbox' ? e.target.checked : e.target.value }))
       setTemp((prev) => ({
-        ...prev, [e.target.name]: e.target.checked!= undefined ? e.target.checked : e.target.value
-      }))
+        ...prev,
+        [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value
+      }));
     }
   }
 
@@ -235,7 +237,7 @@ function Biller() {
       datetime: new Date().toLocaleString(),
       items: addInitialData.items,
       total: calculateTotal(addInitialData?.items),
-      credit:addInitialData?.credit
+      credit: addInitialData?.credit
     };
 
     await addDoc(collection(db, "bill"), {
@@ -258,7 +260,7 @@ function Biller() {
       customerMobile: editInitialData.customerMobile,
       datetime: editInitialData.datetime,
       items: editInitialData.items,
-      credit:editInitialData?.credit,
+      credit: editInitialData?.credit,
       total: calculateTotal(editInitialData?.items)
     };
 
@@ -403,18 +405,18 @@ function Biller() {
       <h1 className="mb-4 text-center">TipTop Billing App</h1>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <button className='btn bg-primary text-light mb-3'><Link to='/bill/BillList'><h6 className='text-light'>Sales</h6></Link></button>
-          <div>
-      <label style={{ paddingRight: "10px" }} htmlFor="credit">
-        Credit
-      </label>
-      <input
-        type="checkbox"
-        id="credit"
-        name="credit"
-        checked={temp?.credit}
-        onChange={handleChange}
-      />
-    </div>
+        <div>
+          <label style={{ paddingRight: "10px" }} htmlFor="credit">
+            Credit
+          </label>
+          <input
+            type="checkbox"
+            id="credit"
+            name="credit"
+            checked={temp?.credit}
+            onChange={handleChange}
+          />
+        </div>
       </div>
 
       <div className="row mb-3">

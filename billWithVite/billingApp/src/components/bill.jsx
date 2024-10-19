@@ -160,7 +160,7 @@ function Bill(props) {
                     <p>Invoice No: <b>{billData?.billNumber}</b></p>
                     <p>Date: {billData?.datetime ? formatDate(new Date(billData?.datetime)) : formatDate(new Date())}</p>
                     <p>Time: {new Date().toLocaleTimeString()}</p>
-                    <p>Term: {billData.credit ? 'credit' : 'cash'}</p>
+                    <p>Term: {billData?.credit ? 'credit' : 'cash'}</p>
                   </div>
                 </td>
 
