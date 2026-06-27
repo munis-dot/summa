@@ -19,8 +19,9 @@ function InvoiceBill({ billData }) {
     <div className="invoice" ref={ref}>
       <div className="invoice-header">
         {/* <img className="logo" src={logo} alt="logo"></img> */}
-        <h6>Sri Tiptop fancy store</h6>
-        <h6>ph:9843306089</h6>
+        <h6>Siva Sakthi Fancy Store</h6>
+        <h6>ph:7708764488, 9080732399</h6>
+        <p>240 B2/1, South East Annur Road, Mettupalayam</p>
         <p className="bill-number">Bill Number: {billNumber}</p>
         <p className="date-time">Date and Time: {new Date(datetime).toLocaleString()}</p>
       </div>

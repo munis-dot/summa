@@ -397,7 +397,7 @@ function Biller() {
 
   return (
     <div className="container mt-5">
-      <h1 className="mb-4 text-center">TipTop Billing App</h1>
+      <h1 className="mb-4 text-center">Siva sakthi Billing App</h1>
       <button className='btn bg-primary text-light mb-3'><Link to='/bill/BillList'><h6 className='text-light'>Sales</h6></Link></button>
      
       <div className="row mb-3">

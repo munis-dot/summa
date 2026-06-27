@@ -122,11 +122,9 @@ function Bill(props) {
 
             </div>
             <div className="col-8 mt-1 from-address d-flex align-items-center flex-column">
-              <h6 style={{fontSize:"35px"}}>SRI TIP TOP FANCY STORE</h6>
-              <p style={{fontSize:"17px"}}>45 B2, Noorullah Mall, Santhosh theatre Opposite</p>
-              <p>phone: 9799112309, 9843306089 </p>
-              <p>Email: tiptopfancystore@gmail.com</p>
-              <p>GSTIN: 33BBMPM3084N1Z6</p>
+              <h6 style={{fontSize:"35px"}}>SIVA SAKTHI FANCY STORE</h6>
+              <p style={{fontSize:"17px"}}>240 B2/1, South East Annur Road, Mettupalayam</p>
+              <p>phone: 7708764488, 9080732399 </p>
               <div className="row" style={{marginTop:"10px"}}>
             <div className="d-flex justify-content-center">
               <p className="h6">Estimate</p>
